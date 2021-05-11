@@ -1,6 +1,11 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import dotenv from "dotenv";
+
+dotenv.config({ path: "../config/config.env" });
+
+const secret = "kxQZ7zgYQQWDdfoqjsRB";
 
 export const signIn = async (req, res) => {
   const { email, password } = req.body;
@@ -40,7 +45,7 @@ export const signUp = async (req, res) => {
       return res.status(400).json({ message: "User already exist." });
 
     if (password !== confirmPassword)
-      return res.status(400).json({ message: "Passwords don't m atch." });
+      return res.status(400).json({ message: "Passwords don't match." });
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
