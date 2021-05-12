@@ -6,6 +6,7 @@ import path from "path";
 import connectDB from "./config/db.js";
 import postsRoutes from "./routes/posts.js";
 import usersRoutes from "./routes/users.js";
+import profileRoutes from "./routes/profile.js";
 
 dotenv.config({ path: "./config/config.env" });
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 
 app.use("/user", usersRoutes);
 app.use("/posts", postsRoutes);
+app.use("/profile", profileRoutes);
 
 const PORT = process.env.PORT || 5000;
 
