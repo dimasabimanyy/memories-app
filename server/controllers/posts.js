@@ -10,6 +10,29 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getRandomPost = async (req, res) => {
+  try {
+    await PostMessage.findOneRandom((err, result) => {
+      if (!err) {
+        res.status(200).json(result);
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getSinglePost = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const postMessage = await PostMessage.findById({ _id: id });
+    res.status(200).json(postMessage);
+  } catch (err) {
+    res.status(404).json({ message: "Post not found" });
+  }
+};
+
 export const createPost = async (req, res) => {
   const post = req.body;
   const newPost = new PostMessage({
@@ -78,5 +101,5 @@ export const likePost = async (req, res) => {
     new: true,
   });
 
-  res.json(updatedPost);
+  res.status(200).json(updatedPost);
 };

@@ -9,6 +9,12 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  coverImage: {
+    type: String,
+  },
+  profileImage: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -17,7 +23,19 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  id: {
+  description: {
+    type: String,
+  },
+  works: {
+    type: [String],
+  },
+  readingList: {
+    type: [String],
+  },
+  location: {
+    type: String,
+  },
+  myWebsite: {
     type: String,
   },
 });
