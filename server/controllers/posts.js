@@ -18,7 +18,17 @@ export const getRandomPost = async (req, res) => {
       }
     });
   } catch (err) {
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: err.message });
+  }
+};
+
+export const getMostLikedPosts = async (req, res) => {
+  try {
+    const posts = await PostMessage.find().sort({ likes: -1 }).limit(6);
+
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
 };
 

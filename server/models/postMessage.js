@@ -8,6 +8,7 @@ const postSchema = mongoose.Schema({
   creator: String,
   tags: [String],
   selectedFile: String,
+  bannerFile: String,
   description: String,
   genre: {
     type: String,
