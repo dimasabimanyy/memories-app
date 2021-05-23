@@ -8,6 +8,7 @@ import {
   getSinglePost,
   getRandomPost,
   getMostLikedPosts,
+  getPostsByGenre,
 } from "../controllers/posts.js";
 import auth from "../middleware/auth.js";
 
@@ -16,6 +17,7 @@ const router = express.Router();
 router.get("/", getPosts);
 router.get("/most-liked", getMostLikedPosts);
 router.get("/random", getRandomPost);
+router.get("/stories/:genre", getPostsByGenre);
 router.get("/:id", getSinglePost);
 
 // Most liked

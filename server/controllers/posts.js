@@ -32,6 +32,17 @@ export const getMostLikedPosts = async (req, res) => {
   }
 };
 
+export const getPostsByGenre = async (req, res) => {
+  const { genre } = req.params;
+
+  try {
+    const posts = await PostMessage.find({ genre: genre });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(404).json({ message: "Story not found" });
+  }
+};
+
 export const getSinglePost = async (req, res) => {
   const { id } = req.params;
 
