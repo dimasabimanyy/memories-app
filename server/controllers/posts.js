@@ -24,11 +24,22 @@ export const getRandomPost = async (req, res) => {
 
 export const getMostLikedPosts = async (req, res) => {
   try {
-    const posts = await PostMessage.find().sort({ likes: -1 }).limit(6);
+    const posts = await PostMessage.find().sort({ likes: -1 }).limit(9);
 
     res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ message: err.message });
+  }
+};
+
+export const getPostsByGenre = async (req, res) => {
+  const { genre } = req.params;
+
+  try {
+    const posts = await PostMessage.find({ genre: genre });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(404).json({ message: "Story not found" });
   }
 };
 

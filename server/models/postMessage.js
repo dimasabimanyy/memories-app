@@ -2,14 +2,31 @@ import mongoose from "mongoose";
 import random from "mongoose-simple-random";
 
 const postSchema = mongoose.Schema({
-  title: String,
-  message: String,
-  name: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  story: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+  },
   creator: String,
   tags: [String],
-  selectedFile: String,
-  bannerFile: String,
-  description: String,
+  mainCharacters: {
+    type: [String],
+    required: true,
+  },
+  selectedFile: {
+    type: String,
+    required: true,
+  },
   genre: {
     type: String,
     required: true,
@@ -25,12 +42,14 @@ const postSchema = mongoose.Schema({
   id: {
     type: String,
   },
-  language: String,
-  rating: String,
+  language: {
+    type: String,
+    required: true,
+  },
 });
 
 postSchema.plugin(random);
 
-const postMessage = mongoose.model("postMessage", postSchema);
+const story = mongoose.model("story", postSchema);
 
-export default postMessage;
+export default story;
