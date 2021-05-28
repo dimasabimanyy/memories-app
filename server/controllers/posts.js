@@ -10,6 +10,21 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsBySearch = async (req, res) => {
+  const { searchQuery, tags } = req.query;
+
+  try {
+    const title = new RegExp(searchQuery, "i");
+    const posts = await PostMessage.find({
+      $or: [{ title }, { tags: { $in: tags.split(",") } }],
+    });
+
+    res.status(200).json({ data: posts });
+  } catch (err) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getRandomPost = async (req, res) => {
   try {
     await PostMessage.findOneRandom((err, result) => {
@@ -33,7 +48,7 @@ export const getMostLikedPosts = async (req, res) => {
 };
 
 export const getPostsByGenre = async (req, res) => {
-  const { genre } = req.params;
+  let { genre } = req.params;
 
   try {
     const posts = await PostMessage.find({ genre: genre }).limit(11);
